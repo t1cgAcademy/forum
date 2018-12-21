@@ -1,0 +1,15 @@
+
+.history {
+  text-align: left;
+  float: left;
+  width: 35%;
+  border: 1px solid;
+}
+
+.historyList {
+  list-style: none
+}
+
+.historyItem {
+  width: 90%;
+}

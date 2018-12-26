@@ -1,4 +1,6 @@
-
+.newPost {
+  text-align: center;
+}
 .history {
   text-align: left;
   float: left;

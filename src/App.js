@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Forum, Comment, Post} from './components/forum/forum';
+import Post from './components/post/post';
 import Header from './components/header/header';
 import History from './components/history/history';
 import Thread from './components/thread/thread';
@@ -17,7 +17,6 @@ import './App.css';
 // summary: ,
 // content: ,
 // replies: ,
-
 
 const history = [
   {
@@ -132,6 +131,7 @@ class App extends Component {
       newComment: {},
       openPost: false,
       post: {},
+      parent: {},
       comment: {},
       history: history,
      };
@@ -147,34 +147,28 @@ class App extends Component {
   newComment = comment => {
     console.log('replying to ', comment)
     this.setState({
-      newComment: comment,
+      parent: comment,
       openComment: true,
       openPost: false,
     })
   }
 
-  handleChange = e => {
-    console.log(e.target.name, e.target.value)
-    var spl = e.target.name.split("-")
-    var type = spl[0]
-    var name = spl[1]
-    console.log(type, name)
-    if (type === "post") {
-      var p = Object.assign({}, this.state.post)
-      p[name] = e.target.value
-      console.log("setting state to ", p)
-      this.setState({
-        post: p,
-      })
-    }
-    if (type === "comment") {
-      var c = Object.assign({}, this.state.comment)
-      c[name] = e.target.value
-      console.log("setting state to ", c)
-      this.setState({
-        comment: c,
-      })
-    }
+  clearComment = () => {
+    this.setState({
+      comment: {},
+      parent: {},
+      openComment: false,
+      openPost: false,
+    })
+  }
+
+  handleCommentChange = e => {
+    var c = Object.assign({}, this.state.comment)
+    c[e.target.name] = e.target.value
+    console.log("setting state to ", c)
+    this.setState({
+      comment: c,
+    })
   }
 
   submitNewComment = () => {
@@ -182,12 +176,14 @@ class App extends Component {
     c.date = new Date()
     c.name = "Anon"
     c.replies = []
+    this.state.parent.replies.push(c)
     var h = this.state.history.slice()
 
     this.setState({
       history: h,
       openComment: false,
-      comment: null,
+      comment: {},
+      parent: {},
     })
   }
 
@@ -199,7 +195,24 @@ class App extends Component {
     //history.unshift(post)
   }
 
+  clearPost = () => {
+    this.setState({
+      post: {},
+      openPost: false,
+    })
+  }
+
+  handlePostChange = e => {
+    var p = Object.assign({}, this.state.post)
+    p[e.target.name] = e.target.value
+    console.log("setting state to ", p)
+    this.setState({
+      post: p,
+    })
+  }
+
   submitNewPost = () => {
+    console.log("submitting")
     var p = this.state.post
     p.date = new Date()
     p.name = "Anon"
@@ -219,32 +232,20 @@ class App extends Component {
       <div className="App">
         <Header newPost={this.newPost}/>
         <div className={'body'}>
+          <History history={this.state.history} handleClick={this.handleClick} newPost={this.newPost}/>
           {this.state.openPost &&
-            <div>
-              <p>post form</p>
-              <label>summary
-                <input name='post-summary' onChange={this.handleChange}/>
-              </label>
-
-              <label>content
-                <textarea name='post-content' onChange={this.handleChange}/>
-              </label>
-
-              <input type="submit" value="Submit" onClick={this.submitNewPost} />
-            </div>
+            <Post handleChange={this.handlePostChange} clearPost={this.clearPost} submitNewPost={this.submitNewPost} />
           }
-          {this.state.openComment &&
-            <div>
-              <p>post comment</p>
-              <label>content
-                <textarea name='comment-content' onChange={this.handleChange}/>
-              </label>
-
-              <input type="submit" value="Submit" onClick={this.submitNewComment} />
-            </div>
+          {!this.state.openPost &&
+            <Thread
+              head={this.state.history[this.state.index]}
+              newComment={this.newComment}
+              clearComment={this.clearComment}
+              parent={this.state.parent}
+              handleChange={this.handleCommentChange}
+              submitNewComment={this.submitNewComment}
+            />
           }
-          <History history={this.state.history} handleClick={this.handleClick}/>
-          <Thread history={this.state.history} index={this.state.index} newComment={this.newComment}/>
         </div>
       </div>
     );

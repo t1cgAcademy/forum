@@ -3,9 +3,9 @@ import React from 'react';
 const Comment = props => {
   return (
     <div>
-      <label>content
+      <div>
         <textarea name='content' onChange={props.handleChange}/>
-      </label>
+      </div>
 
       <input type="button" value="Clear" onClick={props.clearComment} />
       <input type="submit" value="Submit" onClick={props.submitNewComment} />

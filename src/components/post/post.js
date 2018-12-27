@@ -1,17 +1,19 @@
 import React from 'react';
-
+import './post.css';
 
 const Post = props => {
   return (
     <div>
-      <h2>Post Form</h2>
-      <label>summary
+      <h2>New Post</h2>
+      <div className={'form'}>
+        <label>Summary:</label>
         <input name='summary' onChange={props.handleChange}/>
-      </label>
+      </div>
 
-      <label>content
+      <div className={'form'}>
+        Content:
         <textarea name='content' onChange={props.handleChange}/>
-      </label>
+      </div>
 
       <input type="button" value="Clear" onClick={props.clearPost} />
       <input type="submit" value="Submit" onClick={props.submitNewPost} />

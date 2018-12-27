@@ -32,14 +32,14 @@ const History = props => {
       <div>
         {  console.log("history props", props)}
       </div>
-      <button className={'newPost'} onClick={props.newPost}>New Post</button>
+      <button className={'newPostButton'} onClick={props.newPost}>New Post</button>
       <ul className={'historyList'}>
         {
           props.history.map((post, i) => {
             return (
               <li className={'historyItem'} key={i}>
-                <button onClick={() => props.handleClick(i)}>
-                  <h2>{post.summary}</h2>
+                <button className={'historyItem'} onClick={() => props.handleClick(i)}>
+                  <h2>{preview(post.summary.split(" "))}</h2>
                   <p>{preview(post.content.split(" "))}</p>
                 </button>
               </li>

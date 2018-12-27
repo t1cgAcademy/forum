@@ -1,17 +1,22 @@
-.newPost {
-  text-align: center;
+.newPostButton {
+  width: 100%;
+  color: white;
+  padding: 1em;
+  background-color: #0069ff;
 }
+
 .history {
-  text-align: left;
   float: left;
   width: 35%;
   border: 1px solid;
 }
 
 .historyList {
-  list-style: none
+  padding: 0;
+  list-style: none;
 }
 
 .historyItem {
-  width: 90%;
+  text-align: left;
+  width: 100%;
 }

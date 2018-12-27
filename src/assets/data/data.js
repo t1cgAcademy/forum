@@ -58,7 +58,7 @@ const webDev101 = [
         date: 2,
         type: "comment",
         name: "Phil",
-        content: "Mac all day",
+        content: "Mac. It's what we are most familiar with",
         replies: [],
       }
     ],

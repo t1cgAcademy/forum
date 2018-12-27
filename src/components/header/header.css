@@ -8,6 +8,10 @@
   box-sizing: content-box;
 }
 
+.header {
+  background-color: white;
+}
+
 .dropdown {
   display: inline;
 }

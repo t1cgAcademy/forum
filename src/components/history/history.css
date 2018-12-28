@@ -1,16 +1,3 @@
-.newPostButton {
-  width: 100%;
-  color: white;
-  padding: 1em;
-  background-color: #0069ff;
-}
-
-.history {
-  float: left;
-  width: 35%;
-  border: 1px solid;
-}
-
 .historyList {
   padding: 0;
   list-style: none;
@@ -19,4 +6,11 @@
 .historyItem {
   text-align: left;
   width: 100%;
+}
+
+.history {
+  padding: 20px;
+  max-height: 695px;
+  overflow-y: scroll;
+
 }

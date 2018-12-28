@@ -18,56 +18,56 @@ replies: [],
 const webDev101 = [
   {
     date: 21,
-    type: "post",
-    name: "Sean",
-    summary: "When will the first assignment be posted?",
-    content: "When will the first assignment be posted?",
+    type: 'post',
+    name: 'Sean',
+    summary: 'When will the first assignment be posted?',
+    content: 'When will the first assignment be posted?',
     replies: [
       {
         date: 22,
-        type: "comment",
-        name: "Phil",
-        content: "Just posted. github.com/fakelink",
+        type: 'comment',
+        name: 'Phil',
+        content: 'Just posted. github.com/fakelink',
         replies: [
           {
             date: 23,
-            type: "comment",
-            name: "Sean",
-            content: "Thanks!",
-            replies: [],
+            type: 'comment',
+            name: 'Sean',
+            content: 'Thanks!',
+            replies: []
           },
           {
             date: 24,
-            type: "comment",
-            name: "Jon",
-            content: "Thank u",
-            replies: [],
+            type: 'comment',
+            name: 'Jon',
+            content: 'Thank u',
+            replies: []
           }
-        ],
-      },
-    ],
+        ]
+      }
+    ]
   },
   {
     date: 1,
-    type: "post",
-    name: "Jon",
-    summary: "Do you recommend a mac or a PC ",
-    content: "I have access to both and was wondering what I should bring",
+    type: 'post',
+    name: 'Jon',
+    summary: 'Do you recommend a mac or a PC ',
+    content: 'I have access to both and was wondering what I should bring',
     replies: [
       {
         date: 2,
-        type: "comment",
-        name: "Phil",
+        type: 'comment',
+        name: 'Phil',
         content: "Mac. It's what we are most familiar with",
-        replies: [],
+        replies: []
       }
-    ],
+    ]
   },
   {
     date: 0,
-    type: "post",
-    name: "Phil",
-    summary: "Welcome to Web Dev 101",
+    type: 'post',
+    name: 'Phil',
+    summary: 'Welcome to Web Dev 101',
     content: `Web Dev 101 Finalized Curriculum
     Detailed layout of T1CG Web Dev 101 curriculum for instructors to follow.
     TODO: Come up with new Assignments for every class
@@ -171,16 +171,144 @@ const webDev101 = [
     Assignment:
     Finish the rest of the funky hotel app
     Upload to GitHub`,
-    replies: [],
+    replies: []
   },
+  {
+    date: 1,
+    type: 'post',
+    name: 'Jon',
+    summary: 'Do you recommend a mac or a PC ',
+    content: 'I have access to both and was wondering what I should bring',
+    replies: [
+      {
+        date: 2,
+        type: 'comment',
+        name: 'Phil',
+        content: "Mac. It's what we are most familiar with",
+        replies: []
+      }
+    ]
+  },
+  {
+    date: 1,
+    type: 'post',
+    name: 'Jon',
+    summary: 'Do you recommend a mac or a PC ',
+    content: 'I have access to both and was wondering what I should bring',
+    replies: [
+      {
+        date: 2,
+        type: 'comment',
+        name: 'Phil',
+        content: "Mac. It's what we are most familiar with",
+        replies: []
+      }
+    ]
+  },
+  {
+    date: 1,
+    type: 'post',
+    name: 'Jon',
+    summary: 'Do you recommend a mac or a PC ',
+    content: 'I have access to both and was wondering what I should bring',
+    replies: [
+      {
+        date: 2,
+        type: 'comment',
+        name: 'Phil',
+        content: "Mac. It's what we are most familiar with",
+        replies: []
+      }
+    ]
+  },
+  {
+    date: 1,
+    type: 'post',
+    name: 'Jon',
+    summary: 'Do you recommend a mac or a PC ',
+    content: 'I have access to both and was wondering what I should bring',
+    replies: [
+      {
+        date: 2,
+        type: 'comment',
+        name: 'Phil',
+        content: "Mac. It's what we are most familiar with",
+        replies: []
+      }
+    ]
+  },
+  {
+    date: 1,
+    type: 'post',
+    name: 'Jon',
+    summary: 'Do you recommend a mac or a PC ',
+    content: 'I have access to both and was wondering what I should bring',
+    replies: [
+      {
+        date: 2,
+        type: 'comment',
+        name: 'Phil',
+        content: "Mac. It's what we are most familiar with",
+        replies: []
+      }
+    ]
+  },
+  {
+    date: 1,
+    type: 'post',
+    name: 'Jon',
+    summary: 'Do you recommend a mac or a PC ',
+    content: 'I have access to both and was wondering what I should bring',
+    replies: [
+      {
+        date: 2,
+        type: 'comment',
+        name: 'Phil',
+        content: "Mac. It's what we are most familiar with",
+        replies: []
+      }
+    ]
+  },
+  {
+    date: 1,
+    type: 'post',
+    name: 'Jon',
+    summary: 'Do you recommend a mac or a PC ',
+    content: 'I have access to both and was wondering what I should bring',
+    replies: [
+      {
+        date: 2,
+        type: 'comment',
+        name: 'Phil',
+        content: "Mac. It's what we are most familiar with",
+        replies: []
+      }
+    ]
+  },
+  {
+    date: 1,
+    type: 'post',
+    name: 'Jon',
+    summary: 'Do you recommend a mac or a PC ',
+    content: 'I have access to both and was wondering what I should bring',
+    replies: [
+      {
+        date: 2,
+        type: 'comment',
+        name: 'Phil',
+        content: "Mac. It's what we are most familiar with",
+        replies: []
+      }
+    ]
+  }
 ];
 
 const webDev201 = [
   {
     date: 0,
-    type: "post",
-    name: "Phil",
-    summary: "Welcome to Web Dev 201",
+    type: 'post',
+    name: 'Phil',
+    summary: 'Welcome to Web Dev 201',
     content: `In this course we will be covering the following topics.
     Week 1:
       Part 1: Webpack
@@ -200,39 +328,36 @@ const webDev201 = [
     Week 6:
       Part 1: DevOps
       Part 2: Deploying our application`,
-    replies: [],
-  },
+    replies: []
+  }
 ];
 
-const devOps = [
+const devOps = [];
 
-];
-
-const blockChain = [
-
-];
+const blockChain = [];
 
 const classMap = {
   '101': {
-    name: "Web Dev 101",
-    description: "intro to web dev",
-    history: webDev101,
+    name: 'Web Dev 101',
+    description: 'intro to web dev',
+    history: webDev101
   },
   '201': {
-    name: "Web Dev 201",
-    description: "deep dive into web dev",
-    history: webDev201,
+    name: 'Web Dev 201',
+    description: 'deep dive into web dev',
+    history: webDev201
   },
   '301': {
-    name: "Dev Ops",
-    description: "intro to dev ops",
-    history: devOps,
+    name: 'Dev Ops',
+    description: 'intro to dev ops',
+    history: devOps
   },
   '302': {
-    name: "Block Chain",
-    description: "learn all the newest buzzwords that no one will really understand",
-    history: blockChain,
-  },
+    name: 'Block Chain',
+    description:
+      'learn all the newest buzzwords that no one will really understand',
+    history: blockChain
+  }
 };
 
 export default classMap;

@@ -34,7 +34,7 @@ const handleHighlight = (props, i) => {
 
 const History = props => {
   return (
-    <div className="col-md-4 ml-2 mt-2  col-sm-12 col-xs-12 border border-dark history">
+    <div className="col-md-4 ml-2 mt-3 col-sm-12 col-xs-12 border border-dark history">
       <button
         className="button btn-primary btn-block btn-lg mb-1"
         onClick={props.newPost}

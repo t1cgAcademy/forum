@@ -21,7 +21,7 @@ class App extends Component {
       comment: {},
       classMap: classMap,
       history: classMap['101'].history,
-     };
+    };
   }
 
   toggleHeader = () => {

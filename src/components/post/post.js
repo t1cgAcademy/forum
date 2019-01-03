@@ -1,5 +1,4 @@
 import React from 'react';
-import './post.css';
 
 const Post = props => {
   return (
@@ -8,6 +7,7 @@ const Post = props => {
 
       <label htmlFor="summary">Summary:</label>
       <input
+        name="summary"
         type="text"
         className="form-control form-control-lg"
         onChange={props.handleChange}
@@ -15,6 +15,7 @@ const Post = props => {
 
       <label htmlFor="content">Content:</label>
       <textarea
+        name="content"
         type="text"
         className="form-control form-control-lg"
         onChange={props.handleChange}
@@ -28,6 +29,7 @@ const Post = props => {
           className="btn btn-info btn-primary mt-4"
         />
         <input
+          id="submitPost"
           type="submit"
           value="Submit"
           onClick={props.submitNewPost}

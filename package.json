@@ -4,10 +4,12 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "bootstrap": "^4.2.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-hot-loader": "^4.6.3",
     "react-scripts": "2.1.1",
+    "reactstrap": "^7.0.2",
     "sinon": "^7.2.2"
   },
   "scripts": {

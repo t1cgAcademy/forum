@@ -1,5 +1,5 @@
 import React from 'react';
-import Comment from '../comment/Comment';
+import Comment from '../comment/comment';
 import './thread.css';
 
 const thread = (arr, props) => {

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Post from './components/post/Post';
-import History from './components/history/History';
-import Thread from './components/thread/Thread';
+import Post from './components/post/post';
+import History from './components/history/history';
+import Thread from './components/thread/thread';
 import './App.css';
 import classMap from './assets/data/data';
-import Footer from './components/footer/Footer';
-import NavBar from './components/navbar/NavBar';
+import Footer from './components/footer/footer';
+import NavBar from './components/navbar/navBar';
 
 class App extends Component {
   constructor(props) {

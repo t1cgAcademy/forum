@@ -1,5 +1,8 @@
 import React from 'react';
 import './history.css';
+import { connect } from 'react-redux';
+import { openPost, newPost } from '../../Redux/actions/viewActions';
+import { handlePostClick } from '../../Redux/actions/postActions';
 
 const preview = (arr, str = '', count = 0) => {
   if (arr.length === 0) {
@@ -44,10 +47,10 @@ const History = props => {
 
       <div className="card" style={{ cursor: 'pointer' }}>
         <ul className={'list-group list-group-flush historyList'}>
-          {props.history.map((post, i) => {
+          {props.history.history.map((post, i) => {
             return (
-              <li className={handleHighlight(props.index, i)} key={i}>
-                <div onClick={() => props.handleClick(i)}>
+              <li className={handleHighlight(props.post.index, i)} key={i}>
+                <div onClick={() => props.handlePostClick(i)}>
                   <h2>{preview(post.summary.split(' '))}</h2>
                   <p>{preview(post.content.split(' '))}</p>
                 </div>
@@ -60,4 +63,27 @@ const History = props => {
   );
 };
 
-export default History;
+const mapStateToProps = state => ({
+  history: state.history,
+  post: state.post,
+  view: state.view
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    openPost: () => {
+      return dispatch(openPost());
+    },
+    newPost: () => {
+      return dispatch(newPost());
+    },
+    handlePostClick: index => {
+      return dispatch(handlePostClick(index));
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(History);

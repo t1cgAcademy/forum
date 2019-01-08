@@ -1,0 +1,11 @@
+export const TEST_ACTION = 'TEST_ACTION';
+export const HANDLE_POST_CHANGE = 'HANDLE_POST_CHANGE';
+export const SUBMIT_NEW_POST = 'SUBMIT_NEW_POST';
+export const OPEN_COMMENT = 'OPEN_COMMENT';
+export const OPEN_POST = 'OPEN_POST';
+export const HEADER_DROPDOWN = 'HEADER_DROPDOWN';
+export const HANDLE_CHANGE_CLASS = 'HANDLE_CHANGE_CLASS';
+export const NEW_POST = 'NEW_POST';
+export const HANDLE_POST_CLICK = 'HANDLE_POST_CLICK';
+export const CLOSE_POST = 'CLOSE_POST';
+export const CLEAR_POST = 'CLEAR_POST';

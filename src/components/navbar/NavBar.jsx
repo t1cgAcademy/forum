@@ -6,6 +6,13 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
+import { connect } from 'react-redux';
+import {
+  openComment,
+  openPost,
+  toggleHeader,
+  handleChangeClass
+} from '../../Redux/actions/viewActions';
 
 const NavBar = props => {
   return (
@@ -20,20 +27,20 @@ const NavBar = props => {
 
           <Dropdown
             className={'dropdown'}
-            isOpen={props.headerDropDown}
+            isOpen={props.view.headerDropDown}
             toggle={props.toggleHeader}
           >
             <DropdownToggle caret>Class</DropdownToggle>
             <DropdownMenu>
-              {Object.keys(props.classMap).map(key => {
+              {Object.keys(props.view.classMap).map(key => {
                 return (
                   <DropdownItem
                     name={'class'}
                     value={key}
                     key={key}
-                    onClick={props.handleChange}
+                    onClick={e => props.handleChangeClass(e)}
                   >
-                    {props.classMap[key].name}
+                    {props.view.classMap[key].name}
                   </DropdownItem>
                 );
               })}
@@ -55,4 +62,29 @@ const NavBar = props => {
   );
 };
 
-export default NavBar;
+const mapStateToProps = state => ({
+  view: state.view,
+  history: state.history
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    openComment: () => {
+      return dispatch(openComment());
+    },
+    openPost: () => {
+      return dispatch(openPost());
+    },
+    toggleHeader: () => {
+      return dispatch(toggleHeader());
+    },
+    handleChangeClass: e => {
+      return dispatch(handleChangeClass(e.target.value));
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NavBar);

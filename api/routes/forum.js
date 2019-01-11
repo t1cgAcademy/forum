@@ -1,84 +1,69 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router();
 
-// Reservation Model
-const Reservation = require('../models/Reserveration.js');
+// Forum Model
+const Post = require('../models/Post.js');
+// const Course = require('../models/Course.js');
 
-// Room Model
-const Room = require('../models/Room.js');
-
-// Reservation validation
-const validateReservationInput = require('../validation/reservation.js');
-
-// @route   GET api/reservation/test
-// @desc    Tests reservation route
-// @access  Public
-router.get('/test', (req, res) => res.json({ msg: 'Test works' }));
-
-// @route   GET api/reservation
-// @desc    Get all reservations
-// @access  Public
 router.get('/', (req, res) => {
-  Reservation.find()
-    .then(reservations => res.json(reservations))
-    .catch(err => res.status(404).json({ msg: 'No reservations' }));
+  Post.find()
+    .then(post => res.json(post))
+    .catch(err => res.status(404).json({ msg: 'No courses' }));
 });
 
-// @route   GET api/reservation/:id
-// @desc    Get reservation by id
-// @access  Public
 router.get('/:id', (req, res) => {
-  Reservation.findById(req.params.id)
-    .then(reservation => {
-      if (!reservation) {
-        res.status(404).json({ msg: 'No reservation found with that ID' });
+  Post.find({ $or:[ {'_id': req.params.id}, {'parent_id': req.params.id} ]})
+    .then(post => {
+      if (!post) {
+        res.status(404).json({ msg: 'No post found with that id' });
       }
-      res.json(reservation);
+      res.json(post);
     })
     .catch(err =>
-      res.status(404).json({ msg: 'No reservation found with that ID' })
+      res.status(404).json({ msg: 'No post found with that id' })
     );
 });
 
-// @route   POST api/reservation
-// @desc    Create reservation
-// @access  Public
 router.post('/', (req, res) => {
-  const { errors, isValid } = validateReservationInput(req.body);
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
+  const newPost = new Post({
+    date: new Date(),
+    parentID: (req.body.id) ? req.body.id : null,
+    courseID: req.body.code,
+    id: mongoose.Types.ObjectId(),
+    author: req.body.author,
+    summary: (req.body.summary) ? req.body.summary : "",
+    content: req.body.content,
+  })
 
-  // Find if room exists
-  Room.findOne({ number: req.body.roomReserving }).then(room => {
-    if (!room) {
-      errors.room = 'No room found with that number';
-      return res.status(404).json(errors);
-    } else {
-      const newReservation = new Reservation({
-        reserver: req.body.reserver,
-        checkIn: req.body.checkIn,
-        checkOut: req.body.checkOut,
-        roomReserving: room
-      });
-      newReservation
-        .save()
-        .then(reservation => res.json({ reservation, msg: 'Success' }))
-        .catch(err => res.status(404).json(err));
-    }
-  });
+  console.log(newPost)
+
+  newPost
+    .save()
+    .then(post => res.json({ post, msg: 'Success' }))
+    .catch(err => res.status(404).json(err));
 });
 
-// Delete reservation
-router.delete('/:id', (req, res) => {
-  Reservation.findByIdAndDelete(req.params.id)
-    .then(reservation => {
-      if (!reservation) {
-        res.status(404).json({ msg: 'No reservation found with that ID' });
+router.put('/', (req, res) => {
+  Post.findById(req.params.id)
+    .then(post => {
+      if (!post) {
+        res.status(404).json({ msg: 'No post found with that id' });
       }
-      res.json({ success: true });
+
+      post
+        .set({ 
+          summary: req.params.summary,
+          content: req.params.content,
+          date: new Date(),
+        })
+        .save()
+        .catch(err => res.status(404).json(err));
+
     })
-    .catch(err => res.status(404).json({ msg: 'An error occurred' }));
-});
+    .catch(err =>
+      res.status(404).json({ msg: 'No post found with that id' })
+    );
+})
 
 module.exports = router;

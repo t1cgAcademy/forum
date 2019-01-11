@@ -17,9 +17,9 @@ const Header = props => {
           </DropdownToggle>
           <DropdownMenu>
             {
-              Object.keys(props.classMap).map(key => {
+              props.classList.map(course => {
                 return (
-                  <DropdownItem name={'class'} value={key} key={key} onClick={props.handleChange}>{props.classMap[key].name}</DropdownItem>
+                  <DropdownItem name={'class'} value={course.code} key={course.code} onClick={props.handleChange}>{course.name}</DropdownItem>
                 )
               })
             }

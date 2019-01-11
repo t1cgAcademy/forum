@@ -1,24 +1,43 @@
 import React from 'react';
-import './post.css';
 
 const Post = props => {
   return (
-    <div>
-      <h2>New Post</h2>
-      <div className={'form'}>
-        <label>Summary:</label>
-        <input name='summary' onChange={props.handleChange}/>
-      </div>
+    <div className="col-md-6">
+      <h1>New Post</h1>
 
-      <div className={'form'}>
-        Content:
-        <textarea name='content' onChange={props.handleChange}/>
-      </div>
+      <label htmlFor="summary">Summary:</label>
+      <input
+        name="summary"
+        type="text"
+        className="form-control form-control-lg"
+        onChange={props.handleChange}
+      />
 
-      <input type="button" value="Clear" onClick={props.clearPost} />
-      <input type="submit" value="Submit" onClick={props.submitNewPost} />
+      <label htmlFor="content">Content:</label>
+      <textarea
+        name="content"
+        type="text"
+        className="form-control form-control-lg"
+        onChange={props.handleChange}
+      />
+
+      <div className="btn-group-vertical">
+        <input
+          type="button"
+          value="Clear"
+          onClick={props.clearPost}
+          className="btn btn-info btn-primary mt-4"
+        />
+        <input
+          id="submitPost"
+          type="submit"
+          value="Submit"
+          onClick={props.submitNewPost}
+          className="btn btn-info btn-primary mt-4"
+        />
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Post;

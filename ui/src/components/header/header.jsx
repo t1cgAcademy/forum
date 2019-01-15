@@ -5,7 +5,6 @@ import './header.css';
 const Header = props => {
   return (
     <div className={'header'}>
-        Header
         <Dropdown className={'dropdown'} isOpen={props.headerOpen} toggle={props.toggleHeader}>
           <DropdownToggle caret>
             Class

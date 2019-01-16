@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const createServer = require('http').createServer;
-const forum = require('./routes/forum.js');
+const post = require('./routes/post.js');
+const course = require('./routes/course.js');
 const mongo = require('./mongo/mongo.js');
 // const apolloServer = require('./graphql/server.js');
 
@@ -15,7 +16,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // RESTful routes
-app.use('/api/forum', forum);
+app.use('/api/post', post);
+app.use('/api/course', course);
 
 // apply graphQL server to express app and serve at `/graphql` url.
 // NOTE: keep this line of code below all `app.use` statements.

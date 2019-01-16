@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CourseSchema = Schema({
-  id: {
+  code: {
     type: Schema.Types.ObjectId,
     required: true
   },

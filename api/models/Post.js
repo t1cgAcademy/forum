@@ -6,10 +6,6 @@ const PostSchema = Schema({
     type: Schema.Types.ObjectId,
     required: true
   },
-  id: {
-    type: Schema.Types.ObjectId,
-    required: true
-  },
   parentID: {
     type: Schema.Types.ObjectId,
     required: false

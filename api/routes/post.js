@@ -2,15 +2,19 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 
-// Forum Model
 const Post = require('../models/Post.js');
-// const Course = require('../models/Course.js');
 
 router.get('/', (req, res) => {
   Post.find()
     .then(post => res.json(post))
-    .catch(err => res.status(404).json({ msg: 'No courses' }));
+    .catch(err => res.status(404).json({ msg: 'No Posts' }));
 });
+
+// takes an array of posts and builds a nested json object
+// representing a forum
+
+buildThread = (posts) => {
+}
 
 router.get('/:id', (req, res) => {
   Post.find({ $or:[ {'_id': req.params.id}, {'parent_id': req.params.id} ]})

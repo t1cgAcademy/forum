@@ -21,8 +21,33 @@ class App extends Component {
       parent: {},
       comment: {},
       classList: classList,
-      history: classList.find(c => { return c.code === '101'}).history
+      class: "101",
+      history: []
     };
+  }
+
+  componentDidMount() {
+    this.updateHistory()
+  }
+
+  updateHistory = () => {
+    fetch(`http://localhost:7001/api/post/${this.state.class}`)
+      .then((res) => {
+        if (res.status !== 200) {
+          console.log(res)
+          return;
+        }
+
+        res.json().then((data) => {
+          console.log("data", data)
+          this.setState({
+            history: data,
+          })
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   toggleHeader = () => {
@@ -76,19 +101,30 @@ class App extends Component {
   };
 
   submitNewComment = () => {
-    var c = this.state.comment;
-    c.date = new Date();
-    c.name = 'Anon';
-    c.replies = [];
-    this.state.parent.replies.push(c);
-    var h = this.state.history.slice();
+    console.log("parent", this.state.parent)
 
-    this.setState({
-      history: h,
-      openComment: false,
-      comment: {},
-      parent: {}
+    var body = {
+      id: this.state.parent._id,
+      author: 'Anon',
+      code: "101",
+      content: this.state.comment.content
+    }
+
+    fetch("http://localhost:7001/api/post", {
+      method: 'post',
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(body),
+    })
+    .then((data) => {
+      console.log('Request succeeded with JSON response', data);
+      this.updateHistory()
+    })
+    .catch(function (error) {
+      console.log('Request failed', error);
     });
+
   };
 
   newPost = () => {
@@ -116,19 +152,29 @@ class App extends Component {
   };
 
   submitNewPost = () => {
-    console.log('submitting');
-    var p = this.state.post;
-    p.date = new Date();
-    p.name = 'Anon';
-    p.replies = [];
-    var h = this.state.history.slice();
-    h.unshift(p);
+    var body = {
+      author: 'Anon',
+      code: "101",
+      summary: this.state.post.summary,
+      content: this.state.post.content,
+    }
 
-    this.setState({
-      history: h,
-      openPost: false,
-      post: null
+    console.log('submitting', body);
+    fetch("http://localhost:7001/api/post", {
+      method: 'post',
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(body),
+    })
+    .then((data) => {
+      console.log('Request succeeded with JSON response', data);
+      this.updateHistory()
+    })
+    .catch(function (error) {
+      console.log('Request failed', error);
     });
+
   };
 
   render() {

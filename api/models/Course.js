@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const CourseSchema = Schema({
   code: {
-    type: Schema.Types.ObjectId,
+    type: Number,
     required: true
   },
   name: {

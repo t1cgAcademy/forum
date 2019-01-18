@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 const PostSchema = Schema({
   courseID: {
-    type: Schema.Types.ObjectId,
+    type: Number,
     required: true
   },
   parentID: {
-    type: Schema.Types.ObjectId,
-    required: false
+    type: String,
+    required: false,
   },
   date: {
     type: Date,

@@ -1,34 +1,25 @@
-// let data = [
-//   {id: 0, parentID: null},
-//   {id: 4, parentID: 0},
-//   {id: 5, parentID: 0},
-//   {id: 6, parentID: 4},
-//   {id: 7, parentID: 5},
-//   {id: 8, parentID: 5},
-//   {id: 1, parentID: null},
-//   {id: 9, parentID: 1},
-//   {id: 10, parentID: 9},
-//   {id: 11, parentID: 10},
-//   {id: 12, parentID: 10},
-//   {id: 13, parentID: 10},
-//   {id: 2, parentID: null},
-//   {id: 14, parentID: 2},
-//   {id: 15, parentID: 2},
-//   {id: 16, parentID: 14},
-//   {id: 17, parentID: 15},
-//   {id: 18, parentID: 16},
-//   {id: 19, parentID: 17},
-//   {id: 20, parentID: 17},
-//   {id: 21, parentID: 17},
-// ];
-
 let data = [
-  // {id: 0, parentID: null},
+  {id: 0, parentID: null},
   {id: 4, parentID: 0},
   {id: 5, parentID: 0},
   {id: 6, parentID: 4},
   {id: 7, parentID: 5},
   {id: 8, parentID: 5},
+  {id: 1, parentID: null},
+  {id: 9, parentID: 1},
+  {id: 10, parentID: 9},
+  {id: 11, parentID: 10},
+  {id: 12, parentID: 10},
+  {id: 13, parentID: 10},
+  {id: 2, parentID: null},
+  {id: 14, parentID: 2},
+  {id: 15, parentID: 2},
+  {id: 16, parentID: 14},
+  {id: 17, parentID: 15},
+  {id: 18, parentID: 16},
+  {id: 19, parentID: 17},
+  {id: 20, parentID: 17},
+  {id: 21, parentID: 17},
 ];
 
 let jsonData = [
@@ -42,7 +33,8 @@ let jsonData = [
       replies: [
         {
           id: 6, 
-          parentID: 4
+          parentID: 4,
+          replies: []
         },
       ]
     },
@@ -52,11 +44,13 @@ let jsonData = [
       replies: [
         {
           id: 7, 
-          parentID: 5
+          parentID: 5,
+          replies: []
         },
         {
           id: 8, 
-          parentID: 5
+          parentID: 5,
+          replies: []
         },
       ]
     },
@@ -148,22 +142,22 @@ let jsonData = [
   
 ];
 
-// step 1: sort by parentID
-// step 2: make trees using objects with parentID as null as root
-// step 3: 
 
 roots = (data) => {
-  let roots = data.filter( d => {
-    return d.parentID === null
-  })
- 
-  let r = roots.map(root => {
-    root.replies = []
-  })
-  console.log(roots, r)
-  return r
+  let roots = [];
+  let newData = [];
+  for (let i=0; i<data.length; i++) {
+    if (data[i].parentID === null) {
+      roots.push(data[i])
+    } else {
+      newData.push(data[i])
+    }
+  }
+  return {
+    roots: roots, 
+    data: newData
+  }
 }
-
 
 // gets all the objects with parentID equal to the id paramenter
 // and creates a new data set without those objects
@@ -178,37 +172,39 @@ getChildren = (id, data) => {
       newData.push(data[i])
     }
   }
-  return children, newData
-}
-
-// {id: 0, parentID: null},
-// {id: 4, parentID: 0},
-// {id: 5, parentID: 0},
-// {id: 6, parentID: 4},
-// {id: 7, parentID: 5},
-// {id: 8, parentID: 5},
-buildThread = (data) => {
-  // list of all nodes not yet visited
-  let queue = [];
-
-  let root, data = getChildren(null, data)
-
-  let currentNode = root
-  let currentChildren, data = getChildren(currentNode.id, data)
-  currentNode.replies = currentChildren
-  
-  while (currentChildren.length > 0) {
-    currentNode = currentChildren.pop()
-    currentChildren = getChildren(currentNode.id, data)
-
+  return {
+    children, 
+    data: newData
   }
 }
 
-// buildThread = (posts, thread = []) => {
-//   if (posts.length === 0) {
-//     return thread;
-//   }
-// };
+buildThread = (root, data) => {
+  if (data.length === 0) {
+    return thread;
+  }
+  let c = getChildren(root.id, data);
 
-let r = roots(data)
-console.log(r)
+  let thread = {
+    id: root.id,
+    parentID: root.parentID,
+    replies: c.children.map(child => {
+      return buildThread(child, c.data)
+    })
+  }
+  return thread
+};
+
+// the functionality is seperated this way in the hopes
+// of leveraging mongo indicies to improve runtime
+buildForum = (data) => {
+  let forum = []
+  let r = roots(data)
+  for (index in r.roots) {
+    forum.push(buildThread(r.roots[index], r.data))
+  }
+  return forum
+}
+
+let f = buildForum(data)
+console.log(JSON.stringify(f))
+console.log(JSON.stringify(data))
